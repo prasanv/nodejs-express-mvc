@@ -1,0 +1,18 @@
+html
+  include partials/head.pug
+
+  body
+
+    header  
+      include partials/nav.pug
+
+    section.blogs_content
+      h3= "All Blogs"
+      if(blogs.length > 3)
+      for blog in blogs 
+        h4= blog.title 
+        p= blog.snippet 
+      else 
+        p= "Sorry, No blogs to display..."
+
+    include partials/footer.pug

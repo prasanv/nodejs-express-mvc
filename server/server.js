@@ -18,7 +18,7 @@ const server = http.createServer((req, res) => {
   let num = _.random(0, 99);
   console.log(num);
 
-  let path = "views/";
+  let path = "views_html/";
   switch (req.url) {
     case "/":
       path += "index.html";

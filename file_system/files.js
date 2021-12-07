@@ -10,9 +10,10 @@ console.log("Line after readFile async operation");
 
 // Writing to a file Asynchronously
 const newContent = "Hello, Prasan Venkat!";
+
 fs.writeFile("file_system/docs/blogs.txt", newContent, "utf8", (error) => {
   if (error) console.log(error);
-  console.log("File write successful");
+  console.log("File content overwrite successful");
 });
 
 fs.writeFile(

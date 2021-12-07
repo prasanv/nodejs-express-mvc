@@ -1,0 +1,19 @@
+html
+  include partials/head.pug 
+
+  body
+    
+    header  
+      include partials/nav.pug
+    
+    section(class='create_blog content')
+      form(action="") 
+        label(for="title")= "Blog Title" 
+        input(type="text" id="title" name="title" required)
+        label(for="snippet")= "Blog Snippet" 
+        input(type="text" id="snippet" name="snippet" required)
+        label(for="body")= "Blog body" 
+        textarea(id="body" name="body" rows="4" required)
+        button(type="submit")= "submit" 
+    
+    include partials/footer.pug
