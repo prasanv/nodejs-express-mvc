@@ -6,8 +6,8 @@ html
     header  
       include partials/nav.pug
     
-    section(class='create_blog content')
-      form(action="") 
+    div(class='create-blog content')
+      form(action="/blogs" method="POST") 
         label(for="title")= "Blog Title" 
         input(type="text" id="title" name="title" required)
         label(for="snippet")= "Blog Snippet" 

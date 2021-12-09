@@ -6,12 +6,13 @@ html
     header  
       include partials/nav.pug
 
-    section.blogs_content
+    div(class="blogs content")
       h3= "All Blogs"
       if(blogs.length > 3)
       for blog in blogs 
-        h4= blog.title 
-        p= blog.snippet 
+        a(href=`/blogs/${blog.id}` class="single")  
+          h4(class="title")= blog.title 
+          p(class="snippet")= blog.snippet 
       else 
         p= "Sorry, No blogs to display..."
 

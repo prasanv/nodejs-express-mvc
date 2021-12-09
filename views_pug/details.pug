@@ -1,0 +1,31 @@
+html 
+  include partials/head.pug 
+
+  body 
+
+    header  
+      include partials/nav.pug    
+    
+    section
+      div(class="details content")
+        h3= blog.title 
+        div(class="content")
+          p= blog.body
+        a(class="delete" data-blog-id=blog.id)= 'delete'
+
+    include partials/footer.pug
+
+    script.
+      const deleteElement = document.querySelector("a.delete")
+      const blogId = deleteElement.dataset.blogId;
+      const endpoint = `/blogs/${blogId}`
+
+      deleteElement.addEventListener('click',()=>{
+        console.log('delete button clicked')
+        fetch(endpoint, {method: 'DELETE'})
+          .then(res => res.json())
+          .then(data => window.location.href=data.redirect)
+          .catch(err => console.log(err));
+      })
+      
+      
