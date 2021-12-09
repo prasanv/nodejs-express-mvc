@@ -4,19 +4,20 @@ const port = 6060;
 const mongoose = require("mongoose");
 const Blog = require("../models/blog");
 const { blogs, obj } = require("../content/content");
+const dotenv = require("dotenv");
+dotenv.config();
 
 // Express App
 const app = express();
 
 // Mongo DB URI
-const dbURI =
-  "mongodb+srv://prasannode:prasannode@cluster0.01csq.mongodb.net/nodejs?retryWrites=true&w=majority";
+const dbURI = process.env.DB_HOST;
 
 // Connect to Mongo DB using Mongoose
 mongoose
   .connect(dbURI)
   .then((res) => {
-    console.log("connected to DB = ", res.models.Blog);
+    // console.log("connected to DB = ", res.models.Blog);
 
     // Listen to the requests once the DB connection is success
     app.listen(port, () => {
@@ -32,7 +33,7 @@ app.set("views", "views_pug");
 // Custom middleware to log timestamp
 app.use((req, res, next) => {
   const timestamp = new Date();
-  console.log(`CUSTOM MIDDLEWARE - ${timestamp}`);
+  // console.log(`CUSTOM MIDDLEWARE - ${timestamp}`);
   next();
 });
 
