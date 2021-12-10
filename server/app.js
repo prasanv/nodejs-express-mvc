@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const port = 6060;
 const mongoose = require("mongoose");
-const Blog = require("../models/blog");
+const blogRoutes = require("../routes/blogRoutes");
 const { blogs, obj } = require("../content/content");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -18,7 +18,6 @@ mongoose
   .connect(dbURI)
   .then((res) => {
     // console.log("connected to DB = ", res.models.Blog);
-
     // Listen to the requests once the DB connection is success
     app.listen(port, () => {
       console.log("Express App listening on port 6060");
@@ -56,60 +55,10 @@ app.get("/", function (req, res) {
   });
 });
 
-// Get All blog data from 'blogs' collection on MongoDB and sort it by latest
-app.get("/blogs", function (req, res) {
-  console.log(req.url);
-  Blog.find()
-    .sort({ createdAt: -1 })
-    .then((result) => {
-      res.render("index", {
-        pageTitle: "Blogs",
-        heading: "Prasan's Blog",
-        blogs: result,
-      });
-    })
-    .catch((err) => console.log(err));
-});
+// All Blog Routes
+app.use("/blogs", blogRoutes);
 
-// Get individual blog data from 'blogs' collection on MongoDB
-app.get("/blogs/:id", (req, res) => {
-  const id = req.params.id;
-  Blog.findById(id)
-    .then((result) => {
-      res.render("details", {
-        pageTitle: "Individual Blog",
-        heading: "Prasan's Blog",
-        blog: result,
-      });
-    })
-    .catch((err) => console.log(err));
-});
-
-// Delete the blog data on 'blogs' collection on MongoDB
-app.delete("/blogs/:id", (req, res) => {
-  const id = req.params.id;
-  Blog.findByIdAndDelete(id)
-    .then((result) => {
-      console.log(result);
-      // res.redirect("/blogs"); // Since this redirect will not work we can send response object/test back to the browser (i.e. fetch method)
-      res.json({ redirect: "/blogs" });
-    })
-    .catch((err) => console.log(err));
-});
-
-// Post the blog data to 'blogs' collection on MongoDB
-app.post("/blogs", (req, res) => {
-  const blog = new Blog(req.body);
-
-  blog
-    .save()
-    .then((result) => {
-      res.redirect("/blogs");
-      console.log(result);
-    })
-    .catch((err) => console.log(err));
-});
-
+// About Route
 app.get("/about", function (req, res) {
   console.log(req.url);
   res.render("about", {
@@ -123,14 +72,7 @@ app.get("/about-us", (req, res) => {
   res.redirect("/about");
 });
 
-app.get("/create/blog", function (req, res) {
-  console.log(req.url);
-  res.render("create", {
-    pageTitle: "Create a Blog",
-    heading: "Prasan's Blog",
-  });
-});
-
+// API Route
 app.get("/api", (req, res) => {
   console.log(req.url);
   res.json(obj);

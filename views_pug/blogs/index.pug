@@ -1,10 +1,10 @@
 html
-  include blogs/partials/head.pug
+  include partials/head.pug
 
   body
 
     header  
-      include blogs/partials/nav.pug
+      include partials/nav.pug
 
     div(class="blogs content")
       h3= "All Blogs"
@@ -16,4 +16,5 @@ html
       else 
         p= "Sorry, No blogs to display..."
 
-    include blogs/partials/footer.pug
+    include partials/footer.pug
+

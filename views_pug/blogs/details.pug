@@ -11,7 +11,9 @@ html
         h3= blog.title 
         div(class="content")
           p= blog.body
-        a(class="delete" data-blog-id=blog.id)= 'delete'
+        a(class="delete" data-blog-id=blog.id)
+          img(src="/trashcan.svg", alt="trashcan")
+
 
     include partials/footer.pug
 
