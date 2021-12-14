@@ -1,21 +1,19 @@
 const express = require("express");
 const morgan = require("morgan");
 const port = 6060;
+const path = require("path");
+// Mongo DB URI
+const { db_URI } = require("../utils/db_utils");
 const mongoose = require("mongoose");
 const blogRoutes = require("../routes/blogRoutes");
 const { blogs, obj } = require("../content/content");
-const dotenv = require("dotenv");
-dotenv.config();
 
 // Express App
 const app = express();
 
-// Mongo DB URI
-const dbURI = process.env.DB_HOST;
-
 // Connect to Mongo DB using Mongoose
 mongoose
-  .connect(dbURI)
+  .connect(db_URI)
   .then((res) => {
     // console.log("connected to DB = ", res.models.Blog);
     // Listen to the requests once the DB connection is success
@@ -27,7 +25,8 @@ mongoose
 
 // Pug Template Engine
 app.set("view engine", "pug");
-app.set("views", "views_pug");
+const viewsPath = path.join(__dirname, "../views_pug");
+app.set("views", viewsPath);
 
 // Custom middleware to log timestamp
 app.use((req, res, next) => {
@@ -37,7 +36,8 @@ app.use((req, res, next) => {
 });
 
 // Express provided Middleware to publicize static files
-app.use(express.static("public"));
+const publicPath = path.join(__dirname, "../public");
+app.use(express.static(publicPath));
 
 // Extract Data from the url
 app.use(express.urlencoded({ extended: true }));
