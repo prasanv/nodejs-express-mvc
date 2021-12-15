@@ -1,4 +1,4 @@
-const Blog = require("../models/blog");
+const { Blog } = require("../models/blog");
 
 const blog_index = (req, res) => {
   console.log(req.url);
@@ -52,7 +52,7 @@ const blog_create_post = (req, res) => {
     .catch((err) => console.log(err));
 };
 
-const blog_create_delete = (req, res) => {
+const blog_delete_post = (req, res) => {
   const id = req.params.id;
   Blog.findByIdAndDelete(id)
     .then((result) => {
@@ -68,5 +68,5 @@ module.exports = {
   blog_details,
   blog_create_get,
   blog_create_post,
-  blog_create_delete,
+  blog_delete_post,
 };

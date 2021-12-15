@@ -21,4 +21,4 @@ const blogSchema = new mongoose.Schema(
 // Model Name is important because mongoose is going to pluralize it and find then matching collection in the DB
 const Blog = mongoose.model("Blog", blogSchema);
 
-module.exports = Blog;
+module.exports = { Blog };

@@ -5,7 +5,7 @@ const {
   blog_details,
   blog_create_get,
   blog_create_post,
-  blog_create_delete,
+  blog_delete_post,
 } = require("../controller/blogController");
 
 // Get All blog data from 'blogs' collection on MongoDB and sort it by latest
@@ -18,7 +18,7 @@ router.get("/create", blog_create_get);
 router.get("/:id", blog_details);
 
 // Delete the blog data on 'blogs' collection on MongoDB
-router.delete("/:id", blog_create_delete);
+router.delete("/:id", blog_delete_post);
 
 // Post the blog data to 'blogs' collection on MongoDB
 router.post("/", blog_create_post);
