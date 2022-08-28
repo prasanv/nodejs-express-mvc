@@ -6,7 +6,7 @@ if (dotenv.error) {
   throw result.error;
 }
 
-const db_URI = process.env.DB_HOST;
+const db_URI = dotenv?.parsed.DB_URI;
 
 module.exports = {
   db_URI,

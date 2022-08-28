@@ -18,7 +18,7 @@ mongoose
     // console.log("connected to DB = ", res.models.Blog);
     // Listen to the requests once the DB connection is success
     app.listen(port, () => {
-      console.log("Express App listening on port 6060");
+      console.log("Express App listening on http://127.0.0.1:6060/");
     });
   })
   .catch((err) => console.log(err));
